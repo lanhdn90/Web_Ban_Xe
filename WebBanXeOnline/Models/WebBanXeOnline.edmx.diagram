@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a766943a7b9d4867b456377e182de409" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.ChiTietHoaDon" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.HoaDon" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.KhuyenMai" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.LoaiSP" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.NhaCungCap" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.Quyen" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.SanPham" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.TaiKhoan" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanXeOnlineModel.Menu" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_ChiTietHoaDon_HoaDon" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_ChiTietHoaDon_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_HoaDon_TaiKhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_KhuyenMai_TaiKhoan" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_SanPham_KhuyenMai" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_SanPham_LoaiSP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_SanPham_NhaCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_Menu_Quyen" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_TaiKhoan_Quyen" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanXeOnlineModel.FK_SanPham_TaiKhoan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

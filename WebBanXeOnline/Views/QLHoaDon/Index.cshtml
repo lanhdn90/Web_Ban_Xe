@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminMaster.cshtml";
+}
+@using WebBanXeOnline.Models
+@model DonHangViewModel
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+<div class="page-header">
+    <a href="#tab_1-1" data-toggle="tab" class="btn-success table table-striped table-bordered table-hover">Đã xác nhận</a>
+    <a href="#tab_1-2" data-toggle="tab" class="btn-success table table-striped table-bordered table-hover">Chưa xác nhận</a>
+</div>
+<div class="dataTable_wrapper tab-content">
+    <div class=" tab-pane active" id="tab_1-1">
+        <table class="table table-striped table-bordered table-hover" id="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Khách hàng</th>
+                    <th>Nơi nhận</th>
+                    <th>Thời gian</th>
+                    <th>Tổng</th>
+                    <th>Chi Tiết</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DonHangDaDuyet)
+                {
+                <tr>
+
+                    <td>@item.MaHoaDon</td>
+                    <td>@item.HovaTen</td>
+                    <td>@item.DiaChiGiaoHang</td>
+                    <td>@item.ThoiGianGiaoHang</td>
+                    <td>@double.Parse(item.TongTien.ToString()).ToString("##,###") VNĐ</td>
+                    <td><a href="/QLHoaDon/ChiTietHoaDon/@item.MaHoaDon"  class="btn btn-warning">Chi Tiết</a></td>
+                    <td><a data-id="@item.MaHoaDon" class="xoaHoaDon btn btn-danger">Xóa</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane" id="tab_1-2">
+        <table class="table table-striped table-bordered table-hover" id="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Khách hàng</th>
+                    <th>Nơi nhận</th>
+                    <th>Thời gian</th>
+                    <th>Tổng</th>
+                    <th>Chi Tiết</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DonHangChuaDuyet)
+                {
+                <tr>
+
+                    <td>@item.MaHoaDon</td>
+                    <td>@item.HovaTen</td>
+                    <td>@item.DiaChiGiaoHang</td>
+                    <td>@item.ThoiGianGiaoHang</td>
+                    <td>@double.Parse(item.TongTien.ToString()).ToString("##,###") VNĐ</td>
+                    <td><a href="/QLHoaDon/ChiTietHoaDon/@item.MaHoaDon" class="btn btn-warning">Chi Tiết</a></td>
+                    <td><a data-id="@item.MaHoaDon" class="xoaHoaDon btn btn-danger">Xóa</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/admin.js"></script>
+

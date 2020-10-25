@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminMaster</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/Content/metisMenu.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Admin/Index">Web bán xe</a>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> @*@Session["TenTk"]*@ <i class="fa fa-caret-down"></i>
+
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+
+
+
+                        <li>
+                            <a href="/Admin/DangXuat"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+
+                        <li>
+                            <a href="/QLSanPham/Index"><i class="fa fa-th fa-fw"></i> Quản lý sản phẩm</a>
+                        </li>
+                        <li>
+                            <a href="/QLTinTuc/Index"><i class="fa fa-hacker-news fa-fw"></i> Quản lý tin tức</a>
+
+                        </li>
+                        <li>
+                            <a href="/QLHoaDon/Index"><i class="fa fa-file-o fa-fw"></i> Quản lý đơn hàng</a>
+                        </li>
+                        <li>
+                            <a href="/QLTaiKhoan/Index"><i class="fa  fa-user fa-fw"></i> Quản lý tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="/QLHang/Index"><i class="fa fa-link fa-fw"></i>Quản lý hãng</a>
+
+                        </li>
+                        <li>
+                            <a href="/Home/Index"><i class="fa fa-home fa-fw"></i>Trang chủ</a>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @RenderBody()
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/metisMenu.js"></script>
+    <script src="~/Scripts/sb-admin-2.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/ckfinder/ckfinder.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    @RenderSection("jsFooter", required: false)
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+</body>
+</html>
+
