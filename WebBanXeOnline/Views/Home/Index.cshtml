@@ -1,31 +1,125 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebBanXeOnlineEntities shop = new WebBanXeOnlineEntities();
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@using WebBanXeOnline.Models
+@model List<WebBanXeOnline.Models.NhaCungCap>
+<!--banner-ends-->
+<!--Slider-Starts-Here-->
+<!--End-slider-script-->
+<!--about-starts-->
+<div class="about">
+    <div class="container">
+
+        <div class="about-top grid-1">
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-1.jpg" alt="" />
+                    <figcaption>
+                        <h2>Đồng hồ Thụy Sĩ</h2>
+                        <p>Sang trọng - Quý phái</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-2.jpg" alt="" />
+                    <figcaption>
+                        <h4>Đồng hồ Rolex</h4>
+                        <p>Mạnh mẽ - Sang trọng</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-3.jpg" alt="" />
+                    <figcaption>
+                        <h4>Đồng hồ Titan</h4>
+                        <p>Phong cách - Thời trang</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--about-end-->
+<!--product-starts-->
+
+<div class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ">
+
+                @foreach (var item in Model)
+                {
+                    var dsSanPham = shop.SanPham.Where(s => s.MaNCC == item.MaNCC);
+                    <div class="content-panel-title">
+                        <a href="/Home/ChiTietChuyenMuc/@item.MaNCC" class="right">Xem thêm</a>
+                        <h2>@item.TenNCC </h2>
+                    </div>
+                    <div class="product-top" style="margin-bottom: 20px">
+                        <div class="product-one">
+                            @foreach (var sp in dsSanPham.ToList().Skip(0).Take(3))
+                            {
+                                <div class="col-md-4 product-left p-left">
+                                    <div class="product-main simpleCart_shelfItem">
+                                        <a href="/Home/ChiTietSp/@sp.MaSP" class="mask"><img class="img-responsive-2 zoom-img" src="@sp.Anh" alt="" /></a>
+                                        <div class="product-bottom">
+                                            <h3>@sp.TenSP</h3>
+
+                                            <h4><a class="item_add" href="javascript:;" onclick="ThemGioHang(@sp.MaSP)"><i></i></a> <span class="item_price">@double.Parse(sp.GiaBan.ToString()).ToString("##,###") VNĐ</span></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                }
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-4 ">
+                <aside class="sidebar">
+                    <div class="search-bar">
+                        <form action="/Home/TimKiem" method="GET">
+                            <h3>
+
+                                <input type="text" name="search" value="Tìm kiếm" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tìm kiếm';}">
+                                <input type="submit" value="">
+                            </h3>
+                        </form>
+                    </div>
+                    @Html.Partial("TinTucIndex")
+                </aside>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<script type="text/javascript">
+
+    function ThemGioHang(masp) {
+
+        $.ajax({
+            url: '/GioHang/ThemVaoGioHang/?id=' + masp + '&soLuong=' + 1 + '',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                var json = JSON.parse(data);
+                alert(json);
+                window.location.reload();
+            },
+            error: function (err) {
+                alert("Đã xảy ra lỗi"+err.responseText);
+            }
+        });
+    };
+</script>

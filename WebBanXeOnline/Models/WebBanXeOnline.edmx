@@ -19,16 +19,16 @@
           <Key>
             <PropertyRef Name="MaHoaDon" />
           </Key>
-          <Property Name="MaHoaDon" Type="int" Nullable="false" />
+          <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HovaTen" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
-          <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="500" />
           <Property Name="ThoiGianGiaoHang" Type="datetime" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="TrangThai" Type="bit" />
-          <Property Name="MaTaiKhoan" Type="int" Nullable="false" />
+          <Property Name="MaTaiKhoan" Type="int" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="KhuyenMai">
@@ -114,6 +114,17 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           <Property Name="RoleID" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <EntityType Name="TinTuc">
+          <Key>
+            <PropertyRef Name="MaTin" />
+          </Key>
+          <Property Name="MaTin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaTaiKhoan" Type="int" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="Anh" Type="nvarchar" MaxLength="350" />
+          <Property Name="NgayDang" Type="datetime" />
+        </EntityType>
         <Association Name="FK_ChiTietHoaDon_HoaDon">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="0..1" />
           <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
@@ -139,7 +150,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HoaDon_TaiKhoan">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
@@ -234,6 +245,18 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TinTuc_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="MaTaiKhoan" />
+            </Principal>
+            <Dependent Role="TinTuc">
+              <PropertyRef Name="MaTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WebBanXeOnlineModelStoreContainer">
           <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
@@ -243,6 +266,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TinTuc" EntityType="Self.TinTuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Menu].[ID] AS [ID], 
@@ -292,6 +316,10 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
             <End Role="Quyen" EntitySet="Quyen" />
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
           </AssociationSet>
+          <AssociationSet Name="FK_TinTuc_TaiKhoan" Association="Self.FK_TinTuc_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="TinTuc" EntitySet="TinTuc" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -314,16 +342,16 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           <Key>
             <PropertyRef Name="MaHoaDon" />
           </Key>
-          <Property Name="MaHoaDon" Type="Int32" Nullable="false" />
+          <Property Name="MaHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HovaTen" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DiaChiGiaoHang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ThoiGianGiaoHang" Type="DateTime" Precision="3" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="TrangThai" Type="Boolean" />
-          <Property Name="MaTaiKhoan" Type="Int32" Nullable="false" />
+          <Property Name="MaTaiKhoan" Type="Int32" />
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ChiTietHoaDon" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_HoaDon_TaiKhoan" FromRole="HoaDon" ToRole="TaiKhoan" />
@@ -412,6 +440,19 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           <NavigationProperty Name="KhuyenMai" Relationship="Self.FK_KhuyenMai_TaiKhoan" FromRole="TaiKhoan" ToRole="KhuyenMai" />
           <NavigationProperty Name="Quyen" Relationship="Self.FK_TaiKhoan_Quyen" FromRole="TaiKhoan" ToRole="Quyen" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_SanPham_TaiKhoan" FromRole="TaiKhoan" ToRole="SanPham" />
+          <NavigationProperty Name="TinTuc" Relationship="Self.FK_TinTuc_TaiKhoan" FromRole="TaiKhoan" ToRole="TinTuc" />
+        </EntityType>
+        <EntityType Name="TinTuc">
+          <Key>
+            <PropertyRef Name="MaTin" />
+          </Key>
+          <Property Name="MaTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaTaiKhoan" Type="Int32" />
+          <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Anh" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TinTuc_TaiKhoan" FromRole="TinTuc" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -450,7 +491,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HoaDon_TaiKhoan">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
@@ -545,7 +586,19 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebBanXeOnlineEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_TinTuc_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="MaTaiKhoan" />
+            </Principal>
+            <Dependent Role="TinTuc">
+              <PropertyRef Name="MaTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebBanXeOnlineEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" />
           <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" />
@@ -554,6 +607,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
           <EntitySet Name="Quyen" EntityType="Self.Quyen" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="TinTuc" EntityType="Self.TinTuc" />
           <EntitySet Name="Menu" EntityType="Self.Menu" />
           <AssociationSet Name="FK_ChiTietHoaDon_HoaDon" Association="Self.FK_ChiTietHoaDon_HoaDon">
             <End Role="HoaDon" EntitySet="HoaDon" />
@@ -595,13 +649,17 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
+          <AssociationSet Name="FK_TinTuc_TaiKhoan" Association="Self.FK_TinTuc_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="TinTuc" EntitySet="TinTuc" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WebBanXeOnlineModelStoreContainer" CdmEntityContainer="WebBanXeOnlineEntities">
+        <EntityContainerMapping StorageEntityContainer="WebBanXeOnlineModelStoreContainer" CdmEntityContainer="WebBanXeOnlineEntities1">
           <EntitySetMapping Name="ChiTietHoaDon">
             <EntityTypeMapping TypeName="WebBanXeOnlineModel.ChiTietHoaDon">
               <MappingFragment StoreEntitySet="ChiTietHoaDon">
@@ -703,6 +761,18 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinTuc">
+            <EntityTypeMapping TypeName="WebBanXeOnlineModel.TinTuc">
+              <MappingFragment StoreEntitySet="TinTuc">
+                <ScalarProperty Name="MaTin" ColumnName="MaTin" />
+                <ScalarProperty Name="MaTaiKhoan" ColumnName="MaTaiKhoan" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

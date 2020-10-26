@@ -33,6 +33,7 @@ namespace WebBanXeOnline.Models
         public virtual DbSet<Quyen> Quyen { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public virtual DbSet<TinTuc> TinTuc { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
     }
 }

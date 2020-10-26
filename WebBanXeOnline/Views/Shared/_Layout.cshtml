@@ -1,42 +1,211 @@
-﻿<!DOCTYPE html>
+﻿@using WebBanXeOnline.Models
+
+@{
+    WebBanXeOnlineEntities shop = new WebBanXeOnlineEntities();
+    var hangSx = shop.NhaCungCap.ToList().Skip(0).Take(14);
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title -Shop Bán Xe Online</title>
+    <link href="~/Content/memenu.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/AdminLTE.css" rel="stylesheet" />
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/main-stylesheet.css" rel="stylesheet" />
+
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="header-bottom">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <div class="header">
+                <div class="col-md-9 header-left">
+                    <div class="top-nav">
+                        <ul class="memenu skyblue">
+                            <li class="active">
+                                <a href="/Home/Index">Trang chủ</a>
+
+                            </li>
+                            <li class="grid">
+                                <a href="/Home/ChuyenMuc">Sản phẩm</a>
+                                <div class="mepanel">
+                                    <div class="row">
+                                        <div class="col1 me-one">
+                                            <h4><a href="/Home/ChiTietChuyenMuc/@hangSx.Skip(0).Take(1).First().MaNCC">@hangSx.Skip(0).Take(1).First().TenNCC</a></h4>
+                                            @foreach (var item in hangSx.Skip(1).Take(4))
+                                            {
+
+                                                <ul>
+                                                    <li><a href="/Home/ChiTietChuyenMuc/@item.MaNCC">@item.TenNCC</a></li>
+
+                                                </ul>
+                                            }
+                                        </div>
+                                        @if (hangSx.Count() > 5)
+                                        {
+                                            <div class="col1 me-one">
+                                                <h4><a href="/Home/ChiTietChuyenMuc/@hangSx.Skip(5).Take(6).First().MaNCC">@hangSx.Skip(5).Take(6).First().TenNCC</a></h4>
+
+                                                @foreach (var item in hangSx.Skip(6).Take(9))
+                                                {
+
+                                                    <ul>
+                                                        <li><a href="/Home/ChiTietChuyenMuc/@item.MaNCC">@item.TenNCC</a></li>
+
+                                                    </ul>
+                                                }
+                                            </div>
+                                        }
+                                        @if (hangSx.Count() > 10)
+                                        {
+                                            <div class="col1 me-one">
+                                                <h4><a href="/Home/ChiTietChuyenMuc/@hangSx.Skip(10).Take(11).First().MaNCC">@hangSx.Skip(10).Take(11).First().TenNCC</a></h4>
+
+                                                @foreach (var item in hangSx.Skip(11).Take(14))
+                                                {
+
+                                                    <ul>
+                                                        <li><a href="/Home/ChiTietChuyenMuc/@item.MaNCC">@item.TenNCC</a></li>
+
+                                                    </ul>
+                                                }
+
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="grid">
+                                <a href="/Home/TinTuc">Tin tức</a>
+                            </li>
+                            <li class="grid">
+                                <a href="#">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="col-md-3 header-right">
+                    @Html.Partial("GioHang")
+
+                </div>
+                <div class="clearfix"> </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <!--bottom-header-->
+    <!--banner-starts-->
+    @Html.Partial("Slide")
+    @RenderBody()
+    <div style="padding-bottom: 25px;border-bottom: 1px solid #f0f0f0;margin-bottom: 25px;"></div>
+    <!--product-end-->
+    <!--information-starts-->
+    <div class="information">
+        <div class="container">
+            <div class="infor-top">
+                <div class="col-md-3 infor-left">
+                    <h3>Theo dõi</h3>
+                    <ul>
+                        <li><a href="#"><span class="fb"></span><h6>Facebook</h6></a></li>
+                        <li><a href="#"><span class="twit"></span><h6>Twitter</h6></a></li>
+                        <li><a href="#"><span class="google"></span><h6>Google+</h6></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 infor-left">
+                    <h3>Thông tin</h3>
+                    <ul>
+                        <li><a href="#"><p>Đặc biệt</p></a></li>
+                        <li><a href="#"><p>Sản phẩm mới</p></a></li>
+                        <li><a href="#"><p>Cửa hàng</p></a></li>
+                        <li><a href="#"><p>Liên hệ</p></a></li>
+                        <li><a href="#"><p>Bán chạy</p></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 infor-left">
+                    <h3>Dịch vụ</h3>
+                    <ul>
+                        <li><a href="#"><p>Hướng dẫn mua hàng</p></a></li>
+                        <li><a href="#"><p>Chính sách mua hàng</p></a></li>
+                        <li><a href="#"><p>Thông tin khuyến mại</p></a></li>
+                        <li><a href="#"><p>Chính sách trả lại</p></a></li>
+                        <li><a href="#"><p>Bảo hành</p></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 infor-left">
+                    <h3>Thông tin cửa hàng</h3>
+                    <h4>
+                        Cửa hàng xe máy,
+                        <span>Đà Nẵng</span>
+                        ....
+                    </h4>
+                    <h5>+955 123 4567</h5>
+                    <p><a href="mailto:Sieuthidongho@gmail.com">Cuahangxemay@gmail.com</a></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--information-end-->
+    <!--footer-starts-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-top">
+
+                <div class="col-md-6 footer-right pull-right">
+                    <p>© 2020 Cửa hàng xe máy. All Rights Reserved | Design by  <a href="#" target="_blank">Cửa hàng xe máy</a> </p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easydropdown.js"></script>
+    <script src="~/Scripts/memenu.js"></script>
+
+    <script src="~/Scripts/responsiveslides.min.js"></script>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <script src="~/Scripts/simpleCart.min.js"></script>
+
+    <script>$(document).ready(function() { $(".memenu").memenu(); });</script>
+
+    <script>
+			 $(window).load(function() {
+			    //$(function () {
+			      // Slideshow 4
+			      $("#slider4").responsiveSlides({
+			        auto: true,
+			        pager: true,
+			        nav: true,
+			        speed: 500,
+			        namespace: "callbacks",
+			        before: function () {
+			          $('.events').append("<li>before event fired.</li>");
+			        },
+			        after: function () {
+			          $('.events').append("<li>after event fired.</li>");
+			        }
+			      });
+
+			 });
+        //});
+    </script>
 </body>
 </html>
+

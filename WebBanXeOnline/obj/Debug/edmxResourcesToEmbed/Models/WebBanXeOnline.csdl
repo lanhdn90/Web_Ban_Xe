@@ -16,16 +16,16 @@
     <Key>
       <PropertyRef Name="MaHoaDon" />
     </Key>
-    <Property Name="MaHoaDon" Type="Int32" Nullable="false" />
+    <Property Name="MaHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="HovaTen" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="DiaChiGiaoHang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="ThoiGianGiaoHang" Type="DateTime" Precision="3" />
     <Property Name="NgayTao" Type="DateTime" Precision="3" />
     <Property Name="TrangThai" Type="Boolean" />
-    <Property Name="MaTaiKhoan" Type="Int32" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="Int32" />
     <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="ChiTietHoaDon" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_HoaDon_TaiKhoan" FromRole="HoaDon" ToRole="TaiKhoan" />
@@ -114,6 +114,19 @@
     <NavigationProperty Name="KhuyenMai" Relationship="Self.FK_KhuyenMai_TaiKhoan" FromRole="TaiKhoan" ToRole="KhuyenMai" />
     <NavigationProperty Name="Quyen" Relationship="Self.FK_TaiKhoan_Quyen" FromRole="TaiKhoan" ToRole="Quyen" />
     <NavigationProperty Name="SanPham" Relationship="Self.FK_SanPham_TaiKhoan" FromRole="TaiKhoan" ToRole="SanPham" />
+    <NavigationProperty Name="TinTuc" Relationship="Self.FK_TinTuc_TaiKhoan" FromRole="TaiKhoan" ToRole="TinTuc" />
+  </EntityType>
+  <EntityType Name="TinTuc">
+    <Key>
+      <PropertyRef Name="MaTin" />
+    </Key>
+    <Property Name="MaTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaTaiKhoan" Type="Int32" />
+    <Property Name="TieuDe" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Anh" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDang" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TinTuc_TaiKhoan" FromRole="TinTuc" ToRole="TaiKhoan" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -152,7 +165,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_HoaDon_TaiKhoan">
-    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
@@ -247,7 +260,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="WebBanXeOnlineEntities" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK_TinTuc_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="TinTuc">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WebBanXeOnlineEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" />
     <EntitySet Name="HoaDon" EntityType="Self.HoaDon" />
     <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" />
@@ -256,6 +281,7 @@
     <EntitySet Name="Quyen" EntityType="Self.Quyen" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" />
+    <EntitySet Name="TinTuc" EntityType="Self.TinTuc" />
     <EntitySet Name="Menu" EntityType="Self.Menu" />
     <AssociationSet Name="FK_ChiTietHoaDon_HoaDon" Association="Self.FK_ChiTietHoaDon_HoaDon">
       <End Role="HoaDon" EntitySet="HoaDon" />
@@ -296,6 +322,10 @@
     <AssociationSet Name="FK_SanPham_TaiKhoan" Association="Self.FK_SanPham_TaiKhoan">
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
       <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_TaiKhoan" Association="Self.FK_TinTuc_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="TinTuc" EntitySet="TinTuc" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -178,6 +178,9 @@
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>WebBanXeOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TinTuc.cs">
+      <DependentUpon>WebBanXeOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WebBanXeOnline.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +203,7 @@
     <Content Include="App_Data\WebBanXeOnline_log.ldf">
       <DependentUpon>WebBanXeOnline.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\AdminLTE.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1282,9 +1286,11 @@
     <Content Include="Content\dataTables.bootstrap.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\main-stylesheet.css" />
     <Content Include="Content\memenu.css" />
     <Content Include="Content\metisMenu.css" />
     <Content Include="Content\sb-admin-2.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1331,10 +1337,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\abt-1.jpg" />
+    <Content Include="Images\abt-2.jpg" />
+    <Content Include="Images\abt-3.jpg" />
+    <Content Include="Images\bnr-1.jpg" />
+    <Content Include="Images\bnr-2.jpg" />
+    <Content Include="Images\bnr-3.jpg" />
+    <Content Include="Images\cart-2.png" />
+    <Content Include="Images\cart-3.png" />
+    <Content Include="Images\login.png" />
+    <Content Include="Images\online-shopping-cart.png" />
+    <Content Include="Images\s-icons.png" />
+    <Content Include="Images\search.png" />
     <Content Include="Models\WebBanXeOnline.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WebBanXeOnline.Context.cs</LastGenOutput>
       <DependentUpon>WebBanXeOnline.edmx</DependentUpon>
+      <LastGenOutput>WebBanXeOnline.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\WebBanXeOnline.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1344,13 +1362,6 @@
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\WebBanXeOnline.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebBanXeOnline.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\WebBanXeOnline.edmx.diagram">
-      <DependentUpon>WebBanXeOnline.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -1395,6 +1406,16 @@
     <Content Include="Content\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
+    <EntityDeploy Include="Models\WebBanXeOnline.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebBanXeOnline.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WebBanXeOnline.edmx.diagram">
+      <DependentUpon>WebBanXeOnline.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\BreeSerif-Regular.otf" />
+    <Content Include="fonts\BreeSerif-Regular.ttf" />
+    <Content Include="fonts\Lato-Regular.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1408,6 +1429,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.easydropdown.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1416,7 +1438,9 @@
     <Content Include="Scripts\memenu.js" />
     <Content Include="Scripts\metisMenu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\responsiveslides.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="Scripts\simpleCart.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1438,10 +1462,11 @@
     <Content Include="Views\QLHoaDon\Index.cshtml" />
     <Content Include="Views\QLHoaDon\ChiTietHoaDon.cshtml" />
     <Content Include="Views\QLHoaDon\SuaHD.cshtml" />
+    <Content Include="Views\Shared\Slide.cshtml" />
+    <Content Include="Views\Shared\GioHang.cshtml" />
+    <Content Include="Views\Shared\TinTucIndex.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

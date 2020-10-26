@@ -14,16 +14,16 @@
     <Key>
       <PropertyRef Name="MaHoaDon" />
     </Key>
-    <Property Name="MaHoaDon" Type="int" Nullable="false" />
+    <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HovaTen" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
-    <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="250" />
     <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="500" />
     <Property Name="ThoiGianGiaoHang" Type="datetime" />
     <Property Name="NgayTao" Type="datetime" />
     <Property Name="TrangThai" Type="bit" />
-    <Property Name="MaTaiKhoan" Type="int" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="int" />
     <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="KhuyenMai">
@@ -109,6 +109,17 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
     <Property Name="RoleID" Type="int" />
     <Property Name="Status" Type="bit" />
   </EntityType>
+  <EntityType Name="TinTuc">
+    <Key>
+      <PropertyRef Name="MaTin" />
+    </Key>
+    <Property Name="MaTin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="int" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="250" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="Anh" Type="nvarchar" MaxLength="350" />
+    <Property Name="NgayDang" Type="datetime" />
+  </EntityType>
   <Association Name="FK_ChiTietHoaDon_HoaDon">
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="0..1" />
     <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
@@ -134,7 +145,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_HoaDon_TaiKhoan">
-    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TaiKhoan">
@@ -229,6 +240,18 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TinTuc_TaiKhoan">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="TinTuc">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="WebBanXeOnlineModelStoreContainer">
     <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
@@ -238,6 +261,7 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TinTuc" EntityType="Self.TinTuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Menu].[ID] AS [ID], 
@@ -286,6 +310,10 @@ warning 6002: The table/view 'E:\WEBBANXEONLINE\WEBBANXEONLINE\APP_DATA\WEBBANXE
     <AssociationSet Name="FK_TaiKhoan_Quyen" Association="Self.FK_TaiKhoan_Quyen">
       <End Role="Quyen" EntitySet="Quyen" />
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_TaiKhoan" Association="Self.FK_TinTuc_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="TinTuc" EntitySet="TinTuc" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

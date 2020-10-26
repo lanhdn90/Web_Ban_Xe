@@ -20,6 +20,7 @@ namespace WebBanXeOnline.Models
             this.HoaDon = new HashSet<HoaDon>();
             this.KhuyenMai = new HashSet<KhuyenMai>();
             this.SanPham = new HashSet<SanPham>();
+            this.TinTuc = new HashSet<TinTuc>();
         }
     
         public int MaTaiKhoan { get; set; }
@@ -42,5 +43,7 @@ namespace WebBanXeOnline.Models
         public virtual Quyen Quyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPham { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TinTuc> TinTuc { get; set; }
     }
 }
