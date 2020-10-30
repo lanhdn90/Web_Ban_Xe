@@ -44,6 +44,23 @@ namespace WebBanXeOnline.Controllers
             return RedirectToAction("Index", model);
         }
 
+        [HttpPost]
+        public ActionResult ThemChiTietHd(int SanPham, int SoLuong)
+        {
+            var sp = db.SanPham.SingleOrDefault(s => s.MaSP == SanPham);
+            var hd = db.HoaDon.SingleOrDefault(h => h.MaHoaDon == mahd);
+            ChiTietHoaDon ct = new ChiTietHoaDon();
+            ct.MaHoaDon = mahd;
+            ct.MaSP = SanPham;
+            ct.SoLuong = SoLuong;
+            ct.TongTien = SoLuong * sp.GiaBan;
+            db.ChiTietHoaDon.Add(ct);
+            hd.TongTien += ct.TongTien;
+            db.SaveChanges();
+            return RedirectToAction("ChiTietHd", new { id = mahd });
+
+        }
+
         [HttpGet]
         public ActionResult SuaHD(int id)
         {
@@ -76,7 +93,7 @@ namespace WebBanXeOnline.Controllers
             var model = db.ChiTietHoaDon.Find(id);
             var hoaDon = db.HoaDon.Find(model.MaHoaDon);
             var sanPham = db.SanPham.Find(model.MaSP);
-            sanPham.SoLuong = sanPham.SoLuong - soluong + model.SoLuong;  
+            sanPham.SoLuong = sanPham.SoLuong - soluong + model.SoLuong;
             hoaDon.TongTien += (soluong * db.SanPham.Find(model.MaSP).GiaBan) - model.TongTien;
             model.SoLuong = soluong;
             model.TongTien = model.SoLuong * db.SanPham.Find(model.MaSP).GiaBan;
@@ -120,7 +137,7 @@ namespace WebBanXeOnline.Controllers
             //Tìm một đối tượng mà có khóa phụ SingeOrDefau
             //Tim một list mà có khóa phụ Where
             var listChiTietHD = db.ChiTietHoaDon.Where(x => x.MaHoaDon == id).ToList();
-            foreach(var item in listChiTietHD)
+            foreach (var item in listChiTietHD)
             {
                 XoaChiTietHD(item.ChiTietHoaDon1);
             }

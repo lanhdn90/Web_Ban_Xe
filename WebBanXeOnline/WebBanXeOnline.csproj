@@ -144,6 +144,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QLHoaDonController.cs" />
     <Compile Include="Controllers\QLSanPhamController.cs" />
@@ -154,6 +155,8 @@
       <DependentUpon>WebBanXeOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DonHangViewModel.cs" />
+    <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\GioHangViewModel.cs" />
     <Compile Include="Models\HoaDon.cs">
       <DependentUpon>WebBanXeOnline.tt</DependentUpon>
     </Compile>
@@ -1465,6 +1468,9 @@
     <Content Include="Views\Shared\Slide.cshtml" />
     <Content Include="Views\Shared\GioHang.cshtml" />
     <Content Include="Views\Shared\TinTucIndex.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\GioHang\NhapThongTin.cshtml" />
+    <Content Include="Views\GioHang\ThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

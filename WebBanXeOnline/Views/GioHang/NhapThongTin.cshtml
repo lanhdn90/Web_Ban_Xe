@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "NhapThongTin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebBanXeOnline.Models.HoaDon
+@*<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrapvalidator.min.js"></script>
+<div class="container" style="padding: 6em 0px;">
+
+    <form class="well form-horizontal" action="/GioHang/ThanhToan" method="post" id="thanhtoan">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Điền thông tin !</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Họ tên</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" style="display: table-cell;"></i></span>
+
+                        @Html.TextBoxFor(m => m.HovaTen, new { placeholder = "Họ tên", @class = "form-control", name = "hoten", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Địa chỉ</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home" style="display: table-cell;"></i></span>
+                        @Html.TextBoxFor(m => m.DiaChi, new { placeholder = "Địa chỉ", @class = "form-control", name = "diachi", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">E-Mail</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope " style="display: table-cell;"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control", name = "email", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Số ĐT</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone" style="display: table-cell;"></i></span>
+                        @Html.TextBoxFor(m => m.Phone, new { placeholder = "Số điện thoại", @class = "form-control", name = "phone", type = "number", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Địa chỉ giao hàng</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home" style="display: table-cell;"></i></span>
+                        @Html.TextBoxFor(m => m.DiaChiGiaoHang, new { placeholder = "Địa chỉ giao hàng", @class = "form-control", name = "diachigiaohang", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Thời gian giao hàng</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time" style="display: table-cell;"></i></span>
+                        @Html.TextBoxFor(m => m.ThoiGianGiaoHang, new { placeholder = "Thời gian giao", @class = "form-control", name = "thoigiangiao", type = "date", style = " width: 94%;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning">Xác nhận <span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+@*<script src="~/Scripts/validate.js"></script>*@
+<Script>
+
+        $('#thanhtoan').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                HovaTen: {
+                    validators: {
+                        stringLength: {
+                            min: 2,
+                        },
+                        notEmpty: {
+                            message: 'Điền họ tên'
+                        }
+                    }
+                },
+                DiaChi: {
+                    validators: {
+                        stringLength: {
+                            min: 2,
+                        },
+                        notEmpty: {
+                            message: 'Nhập địa chỉ'
+                        }
+                    }
+                },
+                Email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Điền địa chỉ mail'
+                        },
+                        emailAddress: {
+                            message: 'Điền email hợp lệ'
+                        }
+                    }
+                },
+                Phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Điền số điện thoại'
+                        }
+
+                    }
+                },
+                DiaChiGiaoHang: {
+                    validators: {
+                        stringLength: {
+                            min: 8,
+                        },
+                        notEmpty: {
+                            message: 'Nhập địa chỉ giao hàng'
+                        }
+                    }
+                },
+                ThoiGianGiaoHang: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Nhập thời gian giao hàng'
+                        }
+
+                    }
+                }
+            }
+        })
+            .on('success.form.bv', function (e) {
+                //$('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#thanhtoan').data('bootstrapValidator').resetForm();
+
+                // Prevent form submission
+                e.preventDefault();
+
+                // Get the form instance
+                var $form = $(e.target);
+
+                // Get the BootstrapValidator instance
+                var bv = $form.data('bootstrapValidator');
+
+                // Use Ajax to submit form data
+                $.post($form.attr('action'), $form.serialize(), function (result) {
+                    console.log(result);
+                }, 'json');
+            });
+
+
+
+</Script>

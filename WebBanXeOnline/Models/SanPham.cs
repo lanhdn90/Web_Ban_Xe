@@ -28,7 +28,7 @@ namespace WebBanXeOnline.Models
         public string Anh { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> GiaNhap { get; set; }
-        public Nullable<decimal> GiaBan { get; set; }
+        public decimal GiaBan { get; set; }
         public string ChiTiet { get; set; }
         public Nullable<System.DateTime> NgayDang { get; set; }
         public int MaKM { get; set; }
