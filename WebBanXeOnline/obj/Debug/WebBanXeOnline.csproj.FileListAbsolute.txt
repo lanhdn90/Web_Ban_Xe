@@ -89,3 +89,7 @@ E:\WebBanXeOnline\WebBanXeOnline\bin\CKFinder.pdb
 E:\WebBanXeOnline\WebBanXeOnline\bin\CKFinder_FileEditor.pdb
 E:\WebBanXeOnline\WebBanXeOnline\bin\CKFinder_ImageResize.pdb
 E:\WebBanXeOnline\WebBanXeOnline\bin\CKFinder_Watermark.pdb
+E:\WebBanXeOnline\WebBanXeOnline\bin\PagedList.dll
+E:\WebBanXeOnline\WebBanXeOnline\bin\PagedList.Mvc.dll
+E:\WebBanXeOnline\WebBanXeOnline\bin\PagedList.xml
+E:\WebBanXeOnline\WebBanXeOnline\bin\PagedList.Mvc.xml

@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "TimKiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList
+@using PagedList.Mvc
+@using WebBanXeOnline.Models
+@model IPagedList<SanPham>
+<!--banner-ends-->
+<!--Slider-Starts-Here-->
+<!--End-slider-script-->
+<!--about-starts-->
+<div class="about">
+    <div class="container">
+
+        <div class="about-top grid-1">
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-1.jpg" alt="" />
+                    <figcaption>
+                        <h2>Đồng hồ Thụy Sĩ</h2>
+                        <p>Sang trọng - Quý phái</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-2.jpg" alt="" />
+                    <figcaption>
+                        <h4>Đồng hồ Rolex</h4>
+                        <p>Mạnh mẽ - Sang trọng</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 about-left">
+                <figure class="effect-bubba">
+                    <img class="img-responsive" src="~/images/abt-3.jpg" alt="" />
+                    <figcaption>
+                        <h4>Đồng hồ Titan</h4>
+                        <p>Phong cách - Thời trang</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--about-end-->
+<!--product-starts-->
+
+<div class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="content-panel-title">
+                    <h2>Kết quả tìm kiếm cho " @ViewBag.KQ "</h2>
+                </div>
+
+
+                <div class="product-top" style="margin-bottom: 20px">
+                    <div class="product-one">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4 product-left p-left" style="margin-bottom: 10px">
+                                <div class="product-main simpleCart_shelfItem">
+                                    <a href="/Home/ChiTietSp/@item.MaSP" class="mask"><img class="img-responsive-2 zoom-img" src="@item.Anh" alt="" /></a>
+                                    <div class="product-bottom">
+                                        <h3>@item.TenSP</h3>
+
+                                        <h4><a class="item_add" href="javascript:;" onclick="ThemGioHang(@item.MaSP)"><i></i></a> <span class="item_price">@double.Parse(item.GiaBan.ToString()).ToString("##,###") VNĐ</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="content-panel-body  text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("TimKiem", new { search = ViewBag.KQ, page }))
+                </div>
+                <div style="padding-bottom: 25px; border-bottom: 1px solid #f0f0f0; margin-bottom: 25px;"></div>
+
+            </div>
+
+
+            <div class="col-md-4 ">
+                <aside class="sidebar" style="padding: 0">
+
+                    @Html.Partial("TinTucIndex")
+
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    function ThemGioHang(masp) {
+
+        $.ajax({
+            url: '/GioHang/ThemVaoGioHang/?id=' + masp + '&soLuong=' + 1 + '',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                var json = JSON.parse(data);
+                alert(json);
+                window.location.reload();
+            },
+            error: function (err) {
+                alert("Đã xảy ra lỗi"+err.responseText);
+            }
+        });
+    };
+</script>
+
